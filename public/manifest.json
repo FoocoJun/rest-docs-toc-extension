@@ -16,6 +16,9 @@
             "matches": [
                 "<all_urls>"
             ],
+            "css": [
+                "customStyle.css"
+            ],
             "js": [
                 "detector.js"
             ]

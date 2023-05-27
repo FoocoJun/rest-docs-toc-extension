@@ -36,6 +36,7 @@ function detect() {
     chrome.runtime.sendMessage({
       docsDetected: true,
     });
+    insertObserverOnTargetElementList();
   }
 
   // retry if detecting fails
@@ -48,4 +49,67 @@ function detect() {
       delay *= 5;
     }
   }
+}
+
+// List with sections actually observed by the viewport
+let sectionIdList = [];
+
+function insertObserverOnTargetElementList() {
+  let target = '.sect2';
+  // step 1 : set observerCallback
+  function observerCallback(entries, observer) {
+    entries.forEach((entry) => {
+      handleIntersectTargetSection(entry);
+    });
+  }
+
+  // step 2 : create IntersectionObserver with Web API
+  var observer = new IntersectionObserver(observerCallback, {
+    threshold: 0.01,
+  });
+
+  // step 3 : make observer to observe every target Elements
+  document.querySelectorAll(target).forEach((i) => {
+    if (i) {
+      observer.observe(i);
+    }
+  });
+}
+
+// in restDocs. first children of section2 is <h3> Element with detail id(API title or someting)
+function getTargetId(entry) {
+  return entry.target.children[0].id;
+}
+
+// in restDocs. there are 2 navigation items per one id.
+// the first one([0]) is the <a> tag on TOC and the other one is <h3> tag itself.
+function getElementOnTocById(targetId) {
+  return document.querySelectorAll(`[href="#${targetId}"]`)[0].parentElement;
+}
+
+// update className 'activated' on TOC element to show or hide some background
+function updateElementOnTocById(targetId, activated = true) {
+  const elementOnToc = getElementOnTocById(targetId);
+
+  // remove to prepare some observer frame drop Issue
+  elementOnToc.classList.remove('activated');
+  if (activated) {
+    elementOnToc.classList.add('activated');
+  }
+}
+
+// update List with sections actually observed by the viewport
+function updateSectionIdList(targetId, add = true) {
+  if (add) {
+    sectionIdList.push(targetId);
+    return;
+  }
+  sectionIdList = sectionIdList.filter((id) => id !== targetId);
+}
+
+// observerCallback "isIntersecting" handler
+function handleIntersectTargetSection(entry) {
+  const targetId = getTargetId(entry);
+  updateSectionIdList(targetId, entry.isIntersecting);
+  updateElementOnTocById(targetId, entry.isIntersecting);
 }
