@@ -1,0 +1,8 @@
+{
+    "manifest_version": 2,
+    "name": "rest-docs-toc-extension",
+    "version": "0.0.1",
+    "browser_action": {
+        "default_popup": "not-found.html"
+    }
+}

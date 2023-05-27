@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i');
+
+body {
+  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 18px 24px;
+}
+
+body,
+p {
+  margin: 0;
+}
+
+.short-paragraph {
+  min-width: initial;
+  white-space: nowrap;
+  color: #fa5014;
+}
