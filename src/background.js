@@ -3,7 +3,7 @@
 chrome.runtime.onMessage.addListener((req, sender) => {
   if (sender.tab && req.docsDetected) {
     // onMessage with docsDetected set popup with colored icon.
-    chrome.browserAction.setIcon({
+    chrome.action.setIcon({
       tabId: sender.tab.id,
       path: {
         16: `icons/16.png`,
@@ -13,7 +13,7 @@ chrome.runtime.onMessage.addListener((req, sender) => {
     });
     // onMessage with docsDetected set popup with enabled.html.
     // enabled.html "RestDoc is detected on this page."
-    chrome.browserAction.setPopup({
+    chrome.action.setPopup({
       tabId: sender.tab.id,
       popup: `enabled.html`,
     });
