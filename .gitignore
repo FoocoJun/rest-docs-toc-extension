@@ -9,5 +9,8 @@
 
 npm-debug.log*
 
+build.crx
+build.pem
+build.zip
 size-plugin.json
 package-lock.json
