@@ -7,6 +7,9 @@
 # misc
 .DS_Store
 
+# media
+/media
+
 npm-debug.log*
 
 build.crx
