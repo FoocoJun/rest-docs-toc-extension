@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "rest-docs-toc-extension",
+    "name": "RestDocs TOC Extension",
     "version": "0.0.1",
     "description": "make 'Table Of Contents(TOC)' to highlight current position and provide some additional guidance",
     "icons": {
