@@ -20,7 +20,8 @@
                 "customStyle.css"
             ],
             "js": [
-                "detector.js"
+                "detector.js",
+                "keyEventListener.js"
             ]
         }
     ]

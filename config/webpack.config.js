@@ -7,6 +7,7 @@ const PATHS = require('./paths');
 const config = merge(common, {
   entry: {
     detector: PATHS.src + '/contents/detector.js',
+    keyEventListener: PATHS.src + '/contents/keyEventListener.js',
     background: PATHS.src + '/background.js',
   },
 });

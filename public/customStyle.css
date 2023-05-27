@@ -6,3 +6,30 @@
 .activated {
   background-color: #e2f3ff;
 }
+
+#rest-docs-current-content-detail-box {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+#rest-docs-current-content-detail-box {
+  width: 100%;
+  padding: 20px 0;
+  margin: 0;
+  background-color: #333;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#rest-docs-current-content-detail-box {
+  color: #eee;
+  font-size: 16px;
+  text-align: center;
+}
+
+#rest-docs-current-content-detail-box.show {
+  visibility: visible;
+}

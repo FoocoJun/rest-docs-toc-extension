@@ -37,6 +37,7 @@ function detect() {
       docsDetected: true,
     });
     insertObserverOnTargetElementList();
+    insertContentDetailBoxElement();
   }
 
   // retry if detecting fails
@@ -76,6 +77,15 @@ function insertObserverOnTargetElementList() {
   });
 }
 
+// provide additional guidance with "Ctrl" key
+function insertContentDetailBoxElement() {
+  const detailBox = document.createElement('div');
+  detailBox.id = 'rest-docs-current-content-detail-box';
+
+  const targetContainer = document.querySelector('body');
+  targetContainer.prepend(detailBox);
+}
+
 // in restDocs. first children of section2 is <h3> Element with detail id(API title or someting)
 function getTargetId(entry) {
   return entry.target.children[0].id;
@@ -85,6 +95,31 @@ function getTargetId(entry) {
 // the first one([0]) is the <a> tag on TOC and the other one is <h3> tag itself.
 function getElementOnTocById(targetId) {
   return document.querySelectorAll(`[href="#${targetId}"]`)[0].parentElement;
+}
+
+function getContentDetailBoxElement() {
+  return document.getElementById('rest-docs-current-content-detail-box');
+}
+
+// The earliest item must be provided unconditionally
+function getCurrentSectionName() {
+  if (sectionIdList.length === 0) {
+    return '';
+  }
+  const sortedList = sectionIdList.sort();
+
+  const splitedName = sortedList[0].split('_');
+  const number = splitedName.splice(0, 3);
+  return `${number.join(' ')}  ${splitedName.join(' ').toUpperCase()}`;
+}
+
+// update innerText to provide correct additional guidance
+function updateContentDetailBoxElement() {
+  const detailBoxElement = getContentDetailBoxElement();
+  const elementName = getCurrentSectionName();
+
+  const detailString = `Now Reading  < ${elementName} >`;
+  detailBoxElement.innerText = detailString;
 }
 
 // update className 'activated' on TOC element to show or hide some background
@@ -112,4 +147,5 @@ function handleIntersectTargetSection(entry) {
   const targetId = getTargetId(entry);
   updateSectionIdList(targetId, entry.isIntersecting);
   updateElementOnTocById(targetId, entry.isIntersecting);
+  updateContentDetailBoxElement();
 }
