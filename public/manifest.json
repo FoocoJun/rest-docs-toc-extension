@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "RestDocs TOC Extension",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "make 'Table Of Contents(TOC)' to highlight current position and provide some additional guidance",
     "icons": {
         "16": "icons/16.png",
