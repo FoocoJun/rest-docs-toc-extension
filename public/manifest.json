@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "RestDocs TOC Extension",
     "version": "0.0.1",
     "description": "make 'Table Of Contents(TOC)' to highlight current position and provide some additional guidance",
@@ -25,7 +25,8 @@
     "content_scripts": [
         {
             "matches": [
-                "<all_urls>"
+                "*://*/docs/*",
+                "*://*/*/docs/*"
             ],
             "css": [
                 "customStyle.css"
